@@ -1,0 +1,57 @@
+﻿<Window x:Class="MiniTimer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MiniTimer"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="MiniTimer"
+        Height="150"
+        Width="150"
+        Loaded="Windows_Loaded"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        Topmost="True"
+        Icon="/icoTimer.ico">
+    <Grid>
+        <Border CornerRadius="10">
+            <Border.Background>
+                <SolidColorBrush Color="#333333" />
+            </Border.Background>
+            <Grid>
+
+                <Grid x:Name="Ellipse">
+                    <Ellipse Fill="Black"
+                             Width="121"
+                             Height="121"
+                             Opacity="0.1">
+                        <Ellipse.Effect>
+                            <BlurEffect Radius="10" />
+                        </Ellipse.Effect>
+                    </Ellipse>
+
+                    <Ellipse Fill="#424242"
+                             Width="120"
+                             Height="120">
+                    </Ellipse>
+                    <Label x:Name="infoText" 
+                           Content="Click to start"
+                           HorizontalAlignment="Center"
+                           Margin="0,30,0,0"
+                           Foreground="Gray"/>
+                    <Label x:Name="TimerLabel"
+                           Content="0:00"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontWeight="Bold"
+                           Foreground="WhiteSmoke"
+                           FontSize="36" />
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
