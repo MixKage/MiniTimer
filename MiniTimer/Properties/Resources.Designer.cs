@@ -59,15 +59,5 @@ namespace MiniTimer.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap icoTimer {
-            get {
-                object obj = ResourceManager.GetObject("icoTimer", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }

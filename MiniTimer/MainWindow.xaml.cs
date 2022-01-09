@@ -48,6 +48,7 @@ namespace MiniTimer
             {
                 Buttons.Visibility = Visibility.Visible;
             }
+            StartSec = false;
             CreateTimers();
         }
         /// <summary>
@@ -122,6 +123,7 @@ namespace MiniTimer
             StartSec = !StartSec;
             if (StartSec)
             {
+                if (!isStopWatchMode && increment == 0) { StartSec = !StartSec; return; }
                 infoText.Opacity = 0;
                 TimerLabel.Opacity = 1;
                 if (globalTimer != null)
@@ -166,16 +168,16 @@ namespace MiniTimer
         /// </summary>
         private void ShowTime()
         {
-            if(!isStopWatchMode && increment == 0)
+            if (!isStopWatchMode && increment == 0)
             {
                 var notificationManager = new NotificationManager();
-
-                notificationManager.Show(new NotificationContent
-                {
-                    Title = "MiniTimer",
-                    Message = "The time is over!",
-                    Type = NotificationType.Information
-                });
+                if (StartSec)
+                    notificationManager.Show(new NotificationContent
+                    {
+                        Title = "MiniTimer",
+                        Message = "The time is over!",
+                        Type = NotificationType.Information
+                    });
                 DelTime();
             }
             int min = increment / 60;
@@ -255,9 +257,9 @@ namespace MiniTimer
 
         void Decrease(object sender, RoutedEventArgs e)
         {
-            if(increment == 0) { return; }
+            if (increment == 0) { return; }
             increment -= 10;
-            if(increment < 0) { increment = 0; }
+            if (increment < 0) { increment = 0; return; }
             ShowTime();
         }
     }
