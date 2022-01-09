@@ -16,7 +16,8 @@
         AllowsTransparency="True"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         Topmost="True"
-        Icon="/icoTimer.ico">
+        Icon="/icoTimer.ico"
+        x:Name="Window">
     <Grid>
         <Border CornerRadius="10">
             <Border.Background>
@@ -38,11 +39,11 @@
                              Width="120"
                              Height="120">
                     </Ellipse>
-                    <Label x:Name="infoText" 
+                    <Label x:Name="infoText"
                            Content="Click to start"
                            HorizontalAlignment="Center"
                            Margin="0,30,0,0"
-                           Foreground="Gray"/>
+                           Foreground="Gray" />
                     <Label x:Name="TimerLabel"
                            Content="0:00"
                            HorizontalAlignment="Center"
@@ -50,6 +51,41 @@
                            FontWeight="Bold"
                            Foreground="WhiteSmoke"
                            FontSize="36" />
+                </Grid>
+                <Grid x:Name="Buttons"
+                      Visibility="Hidden">
+                    <RepeatButton x:Name="minus"
+                                  Height="25"
+                                  Width="25"
+                                  Margin="0,115,115,0"
+                                  Style="{StaticResource MaterialDesignFloatingActionButton}"
+                                  Delay="500"
+                                  Interval="100"
+                                  Click="Decrease"
+                                  Cursor="Hand">
+                        -
+                        <RepeatButton.Resources>
+                            <SolidColorBrush x:Key="PrimaryHueMidBrush"
+                                             Color="#424242"
+                                             Opacity="0.1" />
+                        </RepeatButton.Resources>
+                    </RepeatButton>
+                    <RepeatButton x:Name="plus"
+                                  Height="25"
+                                  Width="25"
+                                  Margin="115,115,0,0"
+                                  Style="{StaticResource MaterialDesignFloatingActionButton}"
+                                  Cursor="Hand"
+                                  Delay="500"
+                                  Interval="100"
+                                  Click="Increase">
+                        +
+                        <RepeatButton.Resources>
+                            <SolidColorBrush x:Key="PrimaryHueMidBrush"
+                                             Color="#424242"
+                                             Opacity="0.1" />
+                        </RepeatButton.Resources>
+                    </RepeatButton>
                 </Grid>
             </Grid>
         </Border>

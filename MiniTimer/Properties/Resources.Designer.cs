@@ -61,12 +61,12 @@ namespace MiniTimer.Properties {
         }
         
         /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Icon, аналогичного (Значок).
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Icon icoTimer {
+        public static System.Drawing.Bitmap icoTimer {
             get {
                 object obj = ResourceManager.GetObject("icoTimer", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }
