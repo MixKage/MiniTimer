@@ -259,7 +259,7 @@ namespace MiniTimer
         {
             if (increment == 0) { return; }
             increment -= 10;
-            if (increment < 0) { increment = 0; return; }
+            if (increment < 0) { increment = 0; StartSec = false; }
             ShowTime();
         }
     }
