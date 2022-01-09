@@ -255,7 +255,9 @@ namespace MiniTimer
 
         void Decrease(object sender, RoutedEventArgs e)
         {
+            if(increment == 0) { return; }
             increment -= 10;
+            if(increment < 0) { increment = 0; }
             ShowTime();
         }
     }
