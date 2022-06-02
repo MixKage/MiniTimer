@@ -1,7 +1,10 @@
-﻿using Notifications.Wpf;
+﻿using Microsoft.Win32;
+using Notification.Wpf;
+using Notifications.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -166,17 +169,17 @@ namespace MiniTimer
         /// <summary>
         /// Отрисовка времени
         /// </summary>
-        private void ShowTime()
+        private async void ShowTime()
         {
             if (!isStopWatchMode && increment == 0)
             {
-                var notificationManager = new NotificationManager();
                 if (StartSec)
-                    notificationManager.Show(new NotificationContent
+                    await Task.Run(() =>
                     {
-                        Title = "MiniTimer",
-                        Message = "The time is over!",
-                        Type = NotificationType.Information
+                        var notificationManager = new NotificationManager();
+                        notificationManager.Show("MiniTimer", "The time is over!", NotificationType.Information);
+                        PlayNotificationSound();
+                        return Task.CompletedTask;
                     });
                 DelTime();
             }
@@ -207,7 +210,7 @@ namespace MiniTimer
             JumpTask Stopwatch = new JumpTask();
             Stopwatch.Title = "Stopwatch";
             Stopwatch.IconResourcePath = System.Reflection.Assembly.GetEntryAssembly().Location;
-            Stopwatch.Description = "version 1.0";
+            Stopwatch.Description = "version 1.1";
             Stopwatch.ApplicationPath = Assembly.GetEntryAssembly().Location;
             Stopwatch.Arguments = "/Stopwatch";
             jumpList.JumpItems.Add(Stopwatch);
@@ -247,6 +250,34 @@ namespace MiniTimer
                 }
             }
             return true;
+        }
+
+        /// <summary>
+        /// Звук уведомления
+        /// </summary>
+        static private void PlayNotificationSound()
+        {
+            bool found = false;
+            try
+            {
+                using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"AppEvents\Schemes\Apps\.Default\Notification.Default\.Current"))
+                {
+                    if (key != null)
+                    {
+                        Object o = key.GetValue(null); // pass null to get (Default)
+                        if (o != null)
+                        {
+                            SoundPlayer theSound = new SoundPlayer((String)o);
+                            theSound.Play();
+                            found = true;
+                        }
+                    }
+                }
+            }
+            catch
+            { }
+            if (!found)
+                SystemSounds.Beep.Play(); // consolation prize
         }
 
         void Increase(object sender, RoutedEventArgs e)
